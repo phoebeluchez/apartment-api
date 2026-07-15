@@ -33,7 +33,7 @@ A RESTful API for managing apartment maintenance requests, built with a multi-ro
 ### Installation
 
 \`\`\`bash
-git clone <your-repo-url>
+git clone https://github.com/phoebeluchez/apartment-api
 cd apartment-maintenance-system
 npm install
 \`\`\`
