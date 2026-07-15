@@ -1,0 +1,849 @@
+{
+  "info": {
+    "_postman_id": "e0238529-d4ed-4c05-9dcc-fef324ac6532",
+    "name": "Apartment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53487579",
+    "_collection_link": "https://go.postman.co/collection/53487579-e0238529-d4ed-4c05-9dcc-fef324ac6532?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "API check",
+      "item": [
+        {
+          "name": "Check API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tenants",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "John Tenant",
+                  "type": "text",
+                  "uuid": "f3234a66-234a-423f-93a7-f2f267fe5fac"
+                },
+                {
+                  "key": "email",
+                  "value": "jant@test.com",
+                  "type": "text",
+                  "uuid": "47f3a18f-ed98-4008-b2ea-cc6bdaa0db08"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "text",
+                  "uuid": "363b1fbb-933e-4e5b-bd49-b811e8add5ec"
+                },
+                {
+                  "key": "apartmentUnit",
+                  "value": "5C",
+                  "type": "text",
+                  "uuid": "8c6791a3-d1af-4654-a8db-711c0cca014c"
+                },
+                {
+                  "key": "verificationDocument",
+                  "type": "file",
+                  "uuid": "28bbaa76-56be-4f63-a15e-6892e37667ce",
+                  "src": "postman-cloud:///1f17fdf1-ebf8-4ae0-ad84-ce7424414054"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pre verified login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"jant@test.com\",\r\n  \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tenant verification",
+      "item": [
+        {
+          "name": "token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_0j5z}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/pending",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "pending"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "verification status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0fp0}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/6a56cde991d02967ccc5033a/verify",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "6a56cde991d02967ccc5033a",
+                "verify"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post verified login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"john@test.com\",\r\n  \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "staff signup - admin only",
+      "item": [
+        {
+          "name": "staff signup",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_0fp0}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Staff Member\",\r\n  \"email\": \"staff@test.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"staff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/create-staff",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "create-staff"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "maintenance requests",
+      "item": [
+        {
+          "name": "create request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0a7l}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "type": "text",
+                  "uuid": "bf67099c-c201-41ca-94d8-8c76c8acdef9",
+                  "value": "Leaking kitchen faucet"
+                },
+                {
+                  "key": "description",
+                  "type": "text",
+                  "uuid": "1776c2bf-4a20-4c17-9f72-77ed1bb9646f",
+                  "value": "The kitchen faucet has been dripping constantly for two days"
+                },
+                {
+                  "key": "category",
+                  "type": "text",
+                  "uuid": "7986831a-b02f-426a-ac6a-a39a9b7dd7be",
+                  "value": "plumbing"
+                },
+                {
+                  "key": "priority",
+                  "type": "text",
+                  "uuid": "da820eca-bc18-4947-9f16-c50c65e4f854",
+                  "value": "high"
+                },
+                {
+                  "key": "images",
+                  "type": "file",
+                  "uuid": "bbc5d270-1de5-455c-9c48-1655fa04bb12",
+                  "src": [
+                    "postman-cloud:///1f18024c-ccb2-4780-84bb-53eab5f3717a",
+                    "postman-cloud:///1f17fdf1-ebf8-4ae0-ad84-ce7424414054"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "view requests",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0a7l}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "assign requests",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTc0NTY2NzNkZTVkMzJhZTZmNDc0ZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NDEwNjYyNCwiZXhwIjoxNzg0NzExNDI0fQ.JRV3Ny0C7WfoI8kpIyKXIOVFQYVda47R3IlGY_tJXrk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"staffId\": \"6a573d71fd82a9bd4277d509\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests/6a574139c85bf89e7bd591ba/assign",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests",
+                "6a574139c85bf89e7bd591ba",
+                "assign"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update request status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTc0NTY2NzNkZTVkMzJhZTZmNDc0ZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NDEwNjYyNCwiZXhwIjoxNzg0NzExNDI0fQ.JRV3Ny0C7WfoI8kpIyKXIOVFQYVda47R3IlGY_tJXrk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"in_progress\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests/6a574139c85bf89e7bd591ba/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests",
+                "6a574139c85bf89e7bd591ba",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "new admins-admin only",
+      "item": [
+        {
+          "name": "super admin login",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0a7l}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@yourapp.com\",\r\n    \"password\": \"ChangeThisPassword123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new admin signup",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0j5z}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Second Admin\",\r\n  \"email\": \"admin2@test.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/create-staff",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "create-staff"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "item": [
+        {
+          "name": "create comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_0uxy}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"text\": \"Still leaking, can someone check today?\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests/6a574139c85bf89e7bd591ba/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests",
+                "6a574139c85bf89e7bd591ba",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "check comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0uxy}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests/6a574139c85bf89e7bd591ba/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests",
+                "6a574139c85bf89e7bd591ba",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "item": [
+        {
+          "name": "check notifications",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTc0NTY2NzNkZTVkMzJhZTZmNDc0ZiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NDEwNjYyNCwiZXhwIjoxNzg0NzExNDI0fQ.JRV3Ny0C7WfoI8kpIyKXIOVFQYVda47R3IlGY_tJXrk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "view status update- tenants",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTZjZGU5OTFkMDI5NjdjY2M1MDMzYSIsInJvbGUiOiJ0ZW5hbnQiLCJpYXQiOjE3ODQxMDcxNDcsImV4cCI6MTc4NDcxMTk0N30.hTkvOC0orKWKxGl-bKk-KTjc5LTyBDA9XuQ53NiV1K4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "testing edge cases",
+      "item": [
+        {
+          "name": "filter and search- admin only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests?status=in_progress&priority=high&search=faucet&sort=-createdAt&page=1&limit=5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "in_progress"
+                },
+                {
+                  "key": "priority",
+                  "value": "high"
+                },
+                {
+                  "key": "search",
+                  "value": "faucet"
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fetch requests-staff only",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTczZDcxZmQ4MmE5YmQ0Mjc3ZDUwOSIsInJvbGUiOiJzdGFmZiIsImlhdCI6MTc4NDEwNzYxOCwiZXhwIjoxNzg0NzEyNDE4fQ.-Uc5bNGQF2bkkHEzReL3759nqrUMqgNByfJhYCIUcNk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete rules",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTZjZGU5OTFkMDI5NjdjY2M1MDMzYSIsInJvbGUiOiJ0ZW5hbnQiLCJpYXQiOjE3ODQxMDc3OTYsImV4cCI6MTc4NDcxMjU5Nn0.VcNTHmXbnRh8TcckmNjtS6yspNUzZ9r_BxBDOsYMsqg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/requests/6a574139c85bf89e7bd591ba",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "requests",
+                "6a574139c85bf89e7bd591ba"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_service_role_api_key_0fp0",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_0fp0",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0a7l",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0a7l",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0j5z",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_0j5z",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_0uxy",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0uxy",
+      "secret": true
+    }
+  ]
+}
